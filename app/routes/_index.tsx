@@ -1,8 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useState } from "react";
-import MobileDropdownMenu from "~/components/nav/MobileDropdownMenu";
 import HeroContent from "~/components/home/HeroContent";
-import DesktopHeader from "~/components/nav/DesktopHeader";
+import AppShell from "~/components/AppShell";
 import { TaijituSpin } from "~/components/home/TaijituSpin";
 export const meta: MetaFunction = () => {
   return [
@@ -16,17 +14,10 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <div className="flex flex-col items-center font-geist text-white bg-slate-900 h-screen p-4">
-      <DesktopHeader isOpen={isOpen} setIsOpen={setIsOpen} />
-
-      <MobileDropdownMenu isOpen={isOpen} />
-
+    <AppShell>
       <TaijituSpin />
-
       <HeroContent />
-    </div>
+    </AppShell>
   );
 }
