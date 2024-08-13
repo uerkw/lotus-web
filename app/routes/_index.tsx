@@ -19,7 +19,7 @@ export default function Index() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex flex-col items-center text-white bg-slate-900 h-screen font-sans p-4">
+    <div className="flex flex-col items-center font-geist text-white bg-slate-900 h-screen p-4">
       <DesktopHeader isOpen={isOpen} setIsOpen={setIsOpen} />
 
       <MobileDropdownMenu isOpen={isOpen} />
