@@ -8,7 +8,7 @@ export default function HeroContent() {
           <a
             className="text-white underline visited:text-blue-300"
             target="_blank"
-            href="https://disboard.org/server/628771278870020096"
+            href="https://discord.gg/dying-lotus-philosophy-628771278870020096"
             rel="noreferrer"
           >
             Join the Server
