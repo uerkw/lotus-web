@@ -1,8 +1,8 @@
 export default function HeroContent() {
   return (
     <>
-      <h1 className="text-3xl font-bold text-white">Dying Lotus</h1>
-      <h1 className="text-3xl font-bold text-white">Philosophy</h1>
+      <h1 className="text-4xl font-bold text-white">Dying Lotus</h1>
+      <h1 className="text-4xl font-bold text-white">Philosophy</h1>
       <div className="mt-4 space-y-2">
         <div>
           <a
