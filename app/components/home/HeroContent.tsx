@@ -1,4 +1,3 @@
-import DiscordSvg from "~/assets/images/discord-mark-black.svg";
 import DiscordMark from "~/components/icons/DiscordMark";
 export default function HeroContent() {
   return (
