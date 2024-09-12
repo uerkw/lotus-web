@@ -1,4 +1,4 @@
-import taijitu from "/public/taijitu.svg";
+import taijitu from "~/assets/images/taijitu.svg";
 import styles from "./TaijituSpin.module.css";
 export function TaijituSpin() {
   return (
