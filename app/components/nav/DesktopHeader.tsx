@@ -1,4 +1,5 @@
-import HamburgerMenuIcon from "./HamburgerMenuIcon";
+import { motion, useCycle } from "framer-motion";
+import { ToggleHamburger } from "./ToggleHamburger";
 
 interface NavBarStateProps {
   isOpen: boolean;
@@ -6,13 +7,25 @@ interface NavBarStateProps {
 }
 
 export default function DesktopHeader(props: NavBarStateProps) {
+  const [isOpen, setIsOpen] = useCycle(false, true);
+
+  const toggleOpen = () => {
+    setIsOpen();
+    props.setIsOpen(!props.isOpen);
+  };
+
   return (
     <>
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-xl font-bold">Dying Lotus</div>
-
-        <DesktopNavBar />
-        <HamburgerMenuIcon isOpen={props.isOpen} setIsOpen={props.setIsOpen} />
+        <motion.nav
+          initial={false}
+          animate={isOpen ? "open" : "closed"}
+          custom="100%"
+        >
+          <DesktopNavBar />
+          <ToggleHamburger toggle={toggleOpen} />
+        </motion.nav>
       </div>
     </>
   );
