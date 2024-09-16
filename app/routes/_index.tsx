@@ -2,6 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 import HeroContent from "~/components/home/HeroContent";
 import AppShell from "~/components/AppShell";
 import { TaijituSpin } from "~/components/home/TaijituSpin";
+
 export const meta: MetaFunction = () => {
   return [
     { title: "Dying Lotus" },

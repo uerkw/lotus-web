@@ -1,9 +1,5 @@
 import { motion } from "framer-motion";
 
-// interface MenuProps {
-//   isOpen: boolean;
-// }
-
 const MobileDropdownMenuVariants = {
   open: {
     transition: { staggerChildren: 0.07, delayChildren: 0.2 },
@@ -24,30 +20,6 @@ export default function MobileDropdownMenu() {
         <MobileDropdownMenuItem href="/about">About</MobileDropdownMenuItem>
         <MobileDropdownMenuItem href="/blog">Blog</MobileDropdownMenuItem>
         <MobileDropdownMenuItem href="/wiki">Wiki</MobileDropdownMenuItem>
-        {/* <a
-          href="/"
-          className=" px-4 py-2 text-white rounded-md hover:bg-blue-400"
-        >
-          Home
-        </a>
-        <a
-          href="/about"
-          className="px-4 py-2 text-white rounded-md hover:bg-blue-500"
-        >
-          About
-        </a>
-        <a
-          href="/blog"
-          className="px-4 py-2 text-white rounded-md hover:bg-blue-500"
-        >
-          Blog
-        </a>
-        <a
-          href="/wiki"
-          className="px-4 py-2 text-white rounded-md hover:bg-blue-500"
-        >
-          Wiki
-        </a> */}
       </motion.div>
     </>
   );
