@@ -7,7 +7,7 @@ export default function AppShell({ children }: PropsWithChildren) {
   const [navIsOpen, setNavIsOpen] = useState(false);
   return (
     <>
-      <div className="flex flex-col items-center font-geist text-white bg-slate-900 h-screen p-4">
+      <div className="flex flex-col items-center font-geist text-white bg-slate-900 min-h-screen p-4">
         <DesktopHeader isOpen={navIsOpen} setIsOpen={setNavIsOpen} />
         <motion.nav
           initial={false}
