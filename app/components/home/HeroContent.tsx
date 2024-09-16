@@ -5,7 +5,7 @@ export default function HeroContent() {
       <h1 className="text-4xl font-bold text-white">Dying Lotus</h1>
       <h1 className="text-4xl font-bold text-white">Philosophy</h1>
       <p className="text-xl pt-2 text-white text-center">
-        A place for philosophy enjoyers to share their ideas and thoughts.
+        {`Join over 2000 Netizens on Discord's top Taoism and Philosophy server.`}
       </p>
       <div className="mt-4 space-y-2">
         <a
