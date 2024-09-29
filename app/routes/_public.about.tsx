@@ -1,7 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
-import HeroContent from "~/components/home/HeroContent";
-import AppShell from "~/components/AppShell";
-import { TaijituSpin } from "~/components/home/TaijituSpin";
+import { MetaFunction } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -14,11 +11,12 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
+function About() {
   return (
-    <AppShell>
-      <TaijituSpin />
-      <HeroContent />
-    </AppShell>
+    <div className="container justify-start items-start">
+      <h1 className="text-4xl font-bold text-white">Start MDX content here</h1>
+    </div>
   );
 }
+
+export default About;
