@@ -47,6 +47,9 @@ export function DesktopNavBar() {
       <Link to="/wiki" className="text-white hover:text-blue-300">
         Wiki
       </Link>
+      <Link to="/login" className="text-white hover:text-blue-300">
+        Login
+      </Link>
     </div>
   );
 }

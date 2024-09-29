@@ -21,6 +21,7 @@ export default function MobileDropdownMenu() {
         <MobileDropdownMenuItem href="/about">About</MobileDropdownMenuItem>
         <MobileDropdownMenuItem href="/blog">Blog</MobileDropdownMenuItem>
         <MobileDropdownMenuItem href="/wiki">Wiki</MobileDropdownMenuItem>
+        <MobileDropdownMenuItem href="/login">Login</MobileDropdownMenuItem>
       </motion.div>
     </>
   );
