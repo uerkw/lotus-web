@@ -14,5 +14,5 @@ const pool = new Pool({
 
 export const db: NodePgDatabase<typeof schema> = drizzle(pool, {
   schema,
-  logger: true,
+  //logger: true,
 });
