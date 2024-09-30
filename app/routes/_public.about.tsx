@@ -2,7 +2,7 @@ import { MetaFunction } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Dying Lotus" },
+    { title: "Dying Lotus - About" },
     {
       name: "description",
       content:
