@@ -68,7 +68,7 @@ export async function validateAuth(request: Request, response: Response) {
   };
 
   // Check for CSRF
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.ENABLE_CSRF === "true") {
     const originHeader = request.headers.get("Origin");
     const hostHeader = request.headers.get("Host");
     if (
