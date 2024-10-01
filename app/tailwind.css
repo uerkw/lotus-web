@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Geist";
-  src: url("/public/fonts/Geist-Regular.otf") format("otf");
+  src: url("/fonts/Geist-Regular.otf") format("otf");
   font-weight: normal;
   font-style: normal;
 }
