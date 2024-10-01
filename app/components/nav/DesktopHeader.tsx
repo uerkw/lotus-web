@@ -1,5 +1,6 @@
 import { motion, useCycle } from "framer-motion";
 import { ToggleHamburger } from "./ToggleHamburger";
+import { Link } from "@remix-run/react";
 
 interface NavBarStateProps {
   isOpen: boolean;
@@ -34,18 +35,21 @@ export default function DesktopHeader(props: NavBarStateProps) {
 export function DesktopNavBar() {
   return (
     <div className="hidden md:flex space-x-4">
-      <a href="/" className="text-white hover:text-blue-300">
+      <Link to="/" className="text-white hover:text-blue-300">
         Home
-      </a>
-      <a href="/about" className="text-white hover:text-blue-300">
+      </Link>
+      <Link to="/about" className="text-white hover:text-blue-300">
         About
-      </a>
-      <a href="/blog" className="text-white hover:text-blue-300">
+      </Link>
+      <Link to="/blog" className="text-white hover:text-blue-300">
         Blog
-      </a>
-      <a href="/wiki" className="text-white hover:text-blue-300">
+      </Link>
+      <Link to="/wiki" className="text-white hover:text-blue-300">
         Wiki
-      </a>
+      </Link>
+      <Link to="/login" className="text-white hover:text-blue-300">
+        Login
+      </Link>
     </div>
   );
 }

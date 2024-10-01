@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import { motion } from "framer-motion";
 
 const MobileDropdownMenuVariants = {
@@ -20,6 +21,7 @@ export default function MobileDropdownMenu() {
         <MobileDropdownMenuItem href="/about">About</MobileDropdownMenuItem>
         <MobileDropdownMenuItem href="/blog">Blog</MobileDropdownMenuItem>
         <MobileDropdownMenuItem href="/wiki">Wiki</MobileDropdownMenuItem>
+        <MobileDropdownMenuItem href="/login">Login</MobileDropdownMenuItem>
       </motion.div>
     </>
   );
@@ -52,9 +54,9 @@ const MenuItemVariants = {
 export function MobileDropdownMenuItem(props: MobileDropdownMenuItemProps) {
   return (
     <motion.div variants={MenuItemVariants}>
-      <a href={props.href} className="px-4 py-2 text-white">
+      <Link to={props.href} className="px-4 py-2 text-white">
         {props.children}
-      </a>
+      </Link>
     </motion.div>
   );
 }
