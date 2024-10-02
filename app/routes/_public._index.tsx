@@ -21,12 +21,21 @@ export const meta: MetaFunction = () => {
 
 export async function loader({ request }: LoaderFunctionArgs) {
   // Call the Lucia Auth handler to validate the session
-  const newResponse = new Response();
-  const validatedAuthResult = await validateAuth(request, newResponse);
+  const validatedAuthResult = await validateAuth(request);
   console.log(validatedAuthResult);
 
   // Now we can access the validatedAuthResult object's members safely
-  const { user } = validatedAuthResult;
+  const { headers: returnedAuthHeaders, user } = validatedAuthResult;
+
+  // Handle the headers, if there were any
+  if (returnedAuthHeaders["Set-Cookie"]) {
+    return json(
+      { username: user?.username },
+      {
+        headers: { "Set-Cookie": returnedAuthHeaders["Set-Cookie"] },
+      }
+    );
+  }
 
   // Show user if logged in
   return json({ username: user?.username });

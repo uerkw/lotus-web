@@ -56,13 +56,19 @@ export function destroySession() {
 }
 
 interface ValidateAuthObject {
+  headers: {
+    "Set-Cookie": string | null;
+  };
   user: User | null;
   session: Session | null;
 }
 
-export async function validateAuth(request: Request, response: Response) {
+export async function validateAuth(request: Request) {
   // Structure return object:
   const returnObject: ValidateAuthObject = {
+    headers: {
+      "Set-Cookie": null,
+    },
     user: null,
     session: null,
   };
@@ -85,25 +91,35 @@ export async function validateAuth(request: Request, response: Response) {
     lucia.sessionCookieName
   );
 
+  // If we have no session cookie, we return null for the user immediately
   if (!sessionId) {
     returnObject.user = null;
     returnObject.session = null;
     return returnObject;
   }
 
-  const result = await lucia.validateSession(sessionId);
+  const luciaResult = await lucia.validateSession(sessionId);
 
-  if (result.session && result.session.fresh) {
-    const sessionCookie = lucia.createSessionCookie(result.session.id);
+  // Handle case where session has been updated, 'session.fresh' is true
+  if (luciaResult.session && luciaResult.session.fresh) {
+    const sessionCookie = lucia.createSessionCookie(luciaResult.session.id);
 
-    response.headers.set("Set-Cookie", sessionCookie.serialize());
+    //response.headers.set("Set-Cookie", sessionCookie.serialize());
+    returnObject.headers["Set-Cookie"] = sessionCookie.serialize();
   }
 
-  if (!result.session) {
+  // Handle case where we have read a session, but we don't have a match in the DB
+  // This case is essentially where the user submitted a bad session cookie.
+  // This matches the cases of altered cookies, expired sessions in DB, or non-existent sessions in DB
+  if (!luciaResult.session) {
     const sessionCookie = lucia.createBlankSessionCookie();
 
-    response.headers.set("Set-Cookie", sessionCookie.serialize());
+    // response.headers.set("Set-Cookie", sessionCookie.serialize());
+    returnObject.headers["Set-Cookie"] = sessionCookie.serialize();
   }
 
-  return result;
+  returnObject.user = luciaResult.user;
+  returnObject.session = luciaResult.session;
+
+  return returnObject;
 }
