@@ -1,5 +1,5 @@
-import { InferInsertModel, InferSelectModel } from "drizzle-orm";
-import { text, timestamp, pgTable } from "drizzle-orm/pg-core";
+import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm";
+import { text, timestamp, pgTable, varchar, json } from "drizzle-orm/pg-core";
 import { generateId } from "lucia";
 import { createInsertSchema } from "drizzle-zod";
 
@@ -35,3 +35,63 @@ export type InsertUser = InferInsertModel<typeof userTable>;
 // Useful for Zod validations.
 export const insertUserSchema = createInsertSchema(userTable);
 // Session infer insert model not needed due to Lucia handling this through the adapter already.
+
+export const collection = pgTable("collection", {
+  id: text("id").notNull().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const content = pgTable("content", {
+  id: text("id").notNull().primaryKey(),
+  collectionId: text("collectionId")
+    .notNull()
+    .references(() => collection.id),
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  description: text("description").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const revision = pgTable("revision", {
+  id: text("id").notNull().primaryKey(),
+  contentId: text("contentId")
+    .notNull()
+    .references(() => content.id),
+  authorId: text("authorId")
+    .notNull()
+    .references(() => userTable.id),
+  revisionName: varchar("revisionName", { length: 255 }).notNull(),
+  losslessData: json("losslessData").default({
+    data: "This CMS data is empty.",
+  }),
+  markdownData: text("markdownData").default("This CMS data is empty."),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const collectionRelations = relations(collection, ({ many }) => ({
+  content: many(content),
+}));
+
+export const contentRelations = relations(content, ({ many, one }) => ({
+  revisions: many(revision),
+  collection: one(collection, {
+    fields: [content.collectionId],
+    references: [collection.id],
+  }),
+}));
+
+export const revisionRelations = relations(revision, ({ one }) => ({
+  content: one(content, {
+    fields: [revision.contentId],
+    references: [content.id],
+  }),
+  author: one(userTable, {
+    fields: [revision.authorId],
+    references: [userTable.id],
+  }),
+}));
